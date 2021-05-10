@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:security="http://www.springframework.org/schema/security" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans 
+http://springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <bean id="helloService" class="iti.hadeer.HelloServiceImpl"/>
+    <security:global-method-security secured-annotations="enabled" jsr250-annotations="enabled" pre-post-annotations="enabled">
+        <!-- <security:protect-pointcut access="ROLE_ADMIN" expression="execution(* *.sayHello(..))"/> -->
+    </security:global-method-security>
+
+    <security:authentication-manager>
+        <security:authentication-provider>
+            <security:user-service>
+                <security:user name="hadeer" password="$2a$10$tfd056zSk1JyGpIwEszSQef3vJLgta6E8bTfsf/7ZSXv441PuSll2" authorities="ROLE_USER"/>
+            </security:user-service>
+            <security:password-encoder hash="bcrypt" />
+        </security:authentication-provider>
+    </security:authentication-manager>
+</beans>

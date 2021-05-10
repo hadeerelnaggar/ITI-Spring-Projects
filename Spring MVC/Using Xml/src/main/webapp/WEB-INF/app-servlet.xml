@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans 
+http://springframework.org/schema/beans/spring-beans.xsd">
+    <bean name="helloController" class="iti.hadeer.HelloWorldController" />
+
+    <!-- <bean name="/welcome" class="iti.hadeer.HelloWorldController"/> -->
+        
+
+    <bean id="urlCustomMapping" class="iti.hadeer.MyHandlerMapping">
+        <property name="order" value="1"></property>
+    </bean>
+    <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <prop key="/welcome">helloController</prop>
+                <prop key="/static">staticController</prop>
+                <prop key="/messages">messagesController</prop>
+            </props>
+        </property>
+        <property name="order" value="3"></property>
+    </bean>
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix">
+            <value>/WEB-INF/views/</value>
+        </property>
+        <property name="suffix">
+            <value>.jsp</value>
+        </property> 
+    </bean>
+    <!-- Static contollers -->
+    <bean id="staticController" class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+        <property name="viewName" value="static"></property>
+        <property name="statusCode" value="ACCEPTED"></property>
+    </bean>
+    <bean id="messagesController" class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+        <property name="viewName" value="messages"></property>
+        <property name="statusCode" value="ACCEPTED"></property>
+    </bean>
+    <!-- <bean id="staticController" class="iti.hadeer.StaticPageController"/> -->
+
+    <!-- view resolvers -->
+    <!-- using view beans in external xml -->
+    <!-- <bean id="viewResolver1" class="org.springframework.web.servlet.view.XmlViewResolver">
+        <property name="location">
+            <value>/WEB-INF/views.xml</value>
+        </property>
+    </bean> -->
+
+    <!-- resourse resolver -->
+    <!-- <bean id="beanResolver2" class="org.springframework.web.servlet.view.resourceBundleViewResolver">
+        <property name="basename" value="classpath:viewproperties"/>
+    </bean> -->
+
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="messages"></property>
+        <property name="defaultEncoding" value="UTF-8" />
+    </bean>
+
+</beans>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://springframework.org/schema/context/spring-context.xsd"
+ default-init-method="init" default-destroy-method="dest" default-autowire-candidates="person">
+
+<!-- <context:property-placeholder location=""/> -->
+
+<bean id="parent" abstract="true" class="iti.hadeer.Person">
+    <property name="name" value="hadeer"/>
+</bean>
+
+<bean parent="parent" class="iti.hadeer.Student" name="student">
+    <property name="age" value="22"/>
+</bean>
+
+<bean id="parent1" abstract="true">
+    <property name="name" value="hadeer"/>
+    <!-- gives exception as no last name in student -->
+    <!-- <property name="lastName" value="hhh"></property> -->
+</bean>
+
+<bean parent="parent1" class="iti.hadeer.Student" name="student1">
+    <property name="age" value="22"/>
+    <property name="name" value="hadora"></property>
+</bean>
+
+
+
+<!-- gives exception as no class or abstract specified -->
+<!-- <bean id="parent2">
+    <property name="name" value="hadeer"/>
+</bean> -->
+
+<bean id="parent3" abstract="true">
+    <property name="list">
+        <list>
+            <value>hhhhh</value>
+        </list>
+    </property>
+</bean>
+
+<bean id="listTest" class="iti.hadeer.ScopesTest" parent="parent3">
+    <property name="list" >
+        <list merge="true">
+            <value>dardoraaa</value>
+        </list>
+    </property>
+</bean>
+
+</beans>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://springframework.org/schema/context/spring-context.xsd">
+
+    <!-- <context:annotation-config /> -->
+    <context:component-scan base-package="iti.hadeer.annotations" scope-resolver="iti.hadeer.annotations.CustomScope">
+        <!-- use-default-filters="false" -->
+        <context:include-filter type="regex" expression=".*Impl"/>
+        <context:exclude-filter type="regex" expression=".*Repo"/>
+    </context:component-scan>
+    <!-- <bean id="test1" class="iti.hadeer.UsingAutoWiring"/>
+
+    <bean id="test2" class="iti.hadeer.ServiceImpl"/>
+
+    <bean id="test4" class="iti.hadeer.ServiceImpl">
+        <qualifier type="iti.hadeer.MyQualifier">
+            <attribute key="name" value="testt" />
+            <attribute key="number" value="20" />
+        </qualifier>
+    </bean>
+
+
+    <bean id="test3" class="iti.hadeer.ServiceImpl"/> -->
+
+</beans>

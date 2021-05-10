@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans 
+http://springframework.org/schema/beans/spring-beans.xsd" default-init-method="init" default-destroy-method="dest" default-autowire-candidates="person">
+
+    <import resource="bean2.xml" />
+    <bean id="scopeTest1" class="iti.hadeer.ScopesTest" depends-on="person" />
+
+    <bean id="person" class="iti.hadeer.Person" primary="true"/>
+
+    <bean id="person1" class="iti.hadeer.Person" autowire-candidate="false" lazy-init="true"></bean>
+
+    <bean id="scopeTest2" class="iti.hadeer.ScopesTest" scope="prototype" />
+
+    <bean id="objWithList" class="iti.hadeer.ScopesTest">
+        <constructor-arg>
+            <list>
+                <value>Hadeer elnaggar</value>
+                <ref bean="scopeTest1" />
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="testInheritence" class="iti.hadeer.TestInheritence" autowire="byType"></bean>
+
+    <bean id="testInheritence1" class="iti.hadeer.TestInheritence" autowire="byName"></bean>
+
+    <bean id="testInheritence2" class="iti.hadeer.TestInheritence" autowire="constructor"></bean>
+
+</beans>
